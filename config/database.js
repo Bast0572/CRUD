@@ -25,19 +25,19 @@ db.serialize(()=>{
     db.run(`create table if not exists Teams
     (
         id INTEGER PRIMARY KEY,
-        name TEXT
+        name TEXT NOT NULL UNIQUE
     )`)
 })
 
 db.serialize(()=> {
     db.run(`create table if not exists Users 
         (id INTEGER PRIMARY KEY,
-        name TEXT,
-        pwd TEXT,
-        email TEXT,
-        created DATE,
-        updated DATE || null,
-        admin BOOL,
+        name TEXT NOT NULL,
+        pwd TEXT NOT NULL,
+        email TEXT NOT NULL,
+        created DATE NOT NULL,
+        updated DATE,
+        admin BOOL NOT NULL,
         team INTEGER,
         FOREIGN KEY(team) REFERENCES Teams(id)
         )`
@@ -46,8 +46,8 @@ db.serialize(()=> {
 
 db.serialize(()=> {
     db.run(`create table if not exists User_Team(
-        user_id INTEGER,
-        team_id INTEGER,
+        user_id INTEGER NOT NULL,
+        team_id INTEGER NOT NULL,
         PRIMARY KEY (user_id,team_id),
         FOREIGN KEY (user_id) REFERENCES Users(id),
         FOREIGN KEY (team_id) REFERENCES Teams(id)
