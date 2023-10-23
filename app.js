@@ -9,3 +9,5 @@ process.env.PORT = config.port
 app.listen(process.env.PORT,() =>{
     console.log('Server is listening on smth')
 })
+app.use("/api/users",require("./routes/users.route"))
+
