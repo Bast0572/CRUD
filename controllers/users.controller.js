@@ -14,7 +14,7 @@ const database = require("../config/database.js")
 */
 
 const getAll = (req,res) =>{
-  res.json(database.Users.getAll())
+  res.json(database.Users)
 };
 
 
@@ -25,7 +25,7 @@ const getAll = (req,res) =>{
 */
 
 const getOne =(req,res) => {
-  res.json(database.Users.getOne(req.body.id))
+  res.json(database.Users)
 };
 
 
