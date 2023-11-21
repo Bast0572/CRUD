@@ -55,7 +55,7 @@ const getOne =(id) =>{
 */ 
 
 const add =(name,pwd,email,created,admin,team) =>{
-    const sql ="INSERT INTO Users(name,pwd,email,created,admin,team) VALUES({name},{pwd},{email},{admin},{team}"
+    const sql ="INSERT INTO Users(name,pwd,email,created,admin,team) VALUES({name},{pwd},{email},{admin},{team})"
     db.exec(sql,[name,pwd,email,created,admin,team],(err,rows)=>
     {
         return new Promise((resolve,reject) =>{
