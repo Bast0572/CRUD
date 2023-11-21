@@ -1,9 +1,71 @@
-const database = require("../config/database")
+/*
 
-const getAll= (req,res) =>{res.json(users)}
+  On récupère la base de données 
 
-//module.exports ={getAll}
+*/
 
+const database = require("../config/database.js")
+
+
+/*
+
+   On récupère tout les 'users'
+
+*/
+
+const getAll = (req,res) =>{
+  res.json(database.Users.getAll())
+};
+
+
+/*
+
+  On récupère un 'user' en fonction de son 'id'
+
+*/
+
+const getOne =(req,res) => {
+  res.json(database.Users.getOne(req.body.id))
+};
+
+
+/*
+
+  On modifie un le 'nom'(name) d'un 'user'
+
+*/
+
+
+const update =async (req,res) => {
+  const user = {
+    
+    id: req.body.id,
+    name: req.body.name
+
+  };
+  await user.update(user).then(() =>{
+    res.sendStatus(200);
+  })
+}
+
+/*
+
+  On supprime un 'user' en fonction de son 'id'
+
+*/
+const deleteUser = async (req,res)=>{
+  const user = {
+    id:req.body.id
+  };
+  await user.deleteUser(user).then(()=>
+  res.sendStatus(200))
+}
+
+/*
+
+  On ajoute un 'user'
+
+*/
 const add = async (req, res) => {
   const user = {
     name: req.body.name,
@@ -16,4 +78,6 @@ const add = async (req, res) => {
     res.sendStatus(201);
   });
 };
-module.exports= {add,getAll}
+
+// on exporte les méhodes
+module.exports= {add,getAll,getOne,update,deleteUser}
